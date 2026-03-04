@@ -1,0 +1,33 @@
+### Get all tasks
+GET http://localhost:3000/tasks
+
+### Create a new task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "My First Task",
+    "Description": "This is a test task",
+    "dueDate": "2026-03-10"
+}
+
+### Create another task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "Second Task",
+    "Description": "Another test task",
+    "dueDate": "2026-03-15"
+}
+
+### Update a task (replace TASK_ID with actual id)
+PUT http://localhost:3000/tasks/TASK_ID
+Content-Type: application/json
+
+{
+    "completed": true
+}
+
+### Delete a task (replace TASK_ID with actual id)
+DELETE http://localhost:3000/tasks/TASK_ID
