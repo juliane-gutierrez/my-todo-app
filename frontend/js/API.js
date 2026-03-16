@@ -72,8 +72,8 @@ async function displayTasks() {
     const completedList = document.getElementById('completedList');
     
     // Clear existing lists
-    toDoList.innerHTML = '<h2>To Do</h2>';
-    completedList.innerHTML = '<h2>Completed</h2>';
+    toDoList.innerHTML = '';
+    completedList.innerHTML = '';
     
     tasks.forEach(task => {
         const li = document.createElement('li');

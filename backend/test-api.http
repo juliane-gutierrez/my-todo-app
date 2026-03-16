@@ -1,33 +1,120 @@
-### Get all tasks
+### ============================================================
+### DATA PERSISTENCE QUERIES - TEST FILE
+### ============================================================
+
+### ============ CREATE QUERIES ============
+
+### QUERY 8: Create a new task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "Complete assignment",
+    "Description": "Finish the JavaScript todo app",
+    "dueDate": "2026-03-15",
+    "priority": "high",
+    "category": "school"
+}
+
+### Create another task (different category)
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "Buy groceries",
+    "Description": "Milk, bread, eggs",
+    "dueDate": "2026-03-10",
+    "priority": "medium",
+    "category": "personal"
+}
+
+### Create a low priority task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title": "Clean room",
+    "Description": "Vacuum and dust",
+    "dueDate": "2026-03-20",
+    "priority": "low",
+    "category": "personal"
+}
+
+### QUERY 9: Create multiple tasks at once (bulk)
+POST http://localhost:3000/tasks/bulk
+Content-Type: application/json
+
+{
+    "tasks": [
+        {
+            "title": "Task 1",
+            "Description": "Bulk task 1",
+            "dueDate": "2026-03-12",
+            "priority": "low",
+            "category": "work"
+        },
+        {
+            "title": "Task 2",
+            "Description": "Bulk task 2",
+            "dueDate": "2026-03-14",
+            "priority": "high",
+            "category": "work"
+        }
+    ]
+}
+
+### ============ READ QUERIES ============
+
+### QUERY 1: Get all tasks
 GET http://localhost:3000/tasks
 
-### Create a new task
-POST http://localhost:3000/tasks
+### QUERY 2: Get incomplete tasks (uses index)
+GET http://localhost:3000/tasks/incomplete
+
+### QUERY 3: Get completed tasks
+GET http://localhost:3000/tasks/completed
+
+### QUERY 4: Get tasks by category (uses index)
+GET http://localhost:3000/tasks/category/school
+
+### QUERY 5: Get tasks by priority (uses index)
+GET http://localhost:3000/tasks/priority/high
+
+### QUERY 6: Get overdue tasks
+GET http://localhost:3000/tasks/overdue
+
+### QUERY 7: Get single task by ID (replace with actual ID)
+GET http://localhost:3000/tasks/TASK_ID_HERE
+
+### ============ UPDATE QUERIES ============
+
+### QUERY 10: Update a task (replace TASK_ID)
+PUT http://localhost:3000/tasks/TASK_ID_HERE
 Content-Type: application/json
 
 {
-    "title": "My First Task",
-    "Description": "This is a test task",
-    "dueDate": "2026-03-10"
-}
-
-### Create another task
-POST http://localhost:3000/tasks
-Content-Type: application/json
-
-{
-    "title": "Second Task",
-    "Description": "Another test task",
-    "dueDate": "2026-03-15"
-}
-
-### Update a task (replace TASK_ID with actual id)
-PUT http://localhost:3000/tasks/TASK_ID
-Content-Type: application/json
-
-{
+    "title": "Updated title",
     "completed": true
 }
 
-### Delete a task (replace TASK_ID with actual id)
-DELETE http://localhost:3000/tasks/TASK_ID
+### QUERY 11: Toggle completed status (replace TASK_ID)
+PATCH http://localhost:3000/tasks/TASK_ID_HERE/toggle
+
+### QUERY 12: Update priority only (replace TASK_ID)
+PATCH http://localhost:3000/tasks/TASK_ID_HERE/priority
+Content-Type: application/json
+
+{
+    "priority": "high"
+}
+
+### QUERY 13: Mark all tasks as completed
+PUT http://localhost:3000/tasks/complete-all
+
+### ============ DELETE QUERIES ============
+
+### QUERY 14: Delete a single task (replace TASK_ID)
+DELETE http://localhost:3000/tasks/TASK_ID_HERE
+
+### QUERY 15: Delete all completed tasks
+DELETE http://localhost:3000/tasks/completed/all
